@@ -1,0 +1,217 @@
+<div ng-controller="CVCtrl">
+<!-- Loader -->
+<div id="page-loader" class="bg-white"></div>
+<!-- Loader / End -->
+
+<!-- Header -->
+<header id="header" class="bg-white hidden-sm hidden-xs">
+
+    <!-- Photo -->
+    <div class="photo">
+        <img ng-src="{{ user.avatar_link }}" >
+    </div>
+
+    <!-- Navigation -->
+    <nav id="main-menu">
+        <ul class="nav nav-vertical">
+            <li><a href="" ng-click="gotoAnchor('start')"><span>Start</span></a></li>
+            <li><a href="" ng-click="gotoAnchor('resume')"><span>Resume</span></a></li>
+            <li><a href="" ng-click="gotoAnchor('contact')"><span>Contact</span></a></li>
+        </ul>
+    </nav>
+
+    <!-- Social Media -->
+    <div class="social-media">
+        <strong class="text-sm">Follow me!</strong>
+        <ul class="list-inline margin-t-10">
+            <li ng-repeat="item in user.socialmedia"><a ng-href="{{ item.name }}" class="icon icon-xs"><i class="fa {{ item.icon }}"></i></a></li>
+        </ul>
+    </div>
+
+</header>
+<!-- Header / End -->
+
+<!-- Content -->
+<div id="content" class="bg-white">
+
+    <!-- Section - Home -->
+    <section id="start" class="section fullheight bg-secondary dark padding-v-60">
+
+        <!-- BG Image -->
+        <div class="bg-image animated infinite zooming visible" style="background-image: url('{{user.cover_link}}');"><img ng-src="{{user.cover_link}}" style="display: none;"></div>
+
+        <!-- Top -->
+        <div class="container container-wide text-md">
+            <i class="icon-before fa fa-comments text-primary"></i>Have you got any questions? Write to me at <a class="text-primary">{{ user.email }}</a>
+        </div>
+
+        <!-- Middle -->
+        <div class="container container-wide v-bottom padding-v-80">
+            <h1 class="text-lg margin-b-0">Hi! I’m <strong>{{ user.name }}</strong></h1>
+            <h5 class="text-tertiary margin-b-40">experienced {{ user.occupation }}</h5>
+            <span data-target="local-scroll"><a href="" ng-click="gotoAnchor('resume')" class="btn btn-lg btn-primary animated" data-animation="bounceIn"><span>Go to my resume!</span><i class="ti-arrow-down"></i></a></span>
+            <a ng-href="{{ user.cv_link }}" class="btn btn-link"><span>Download my CV</span><i class="ti-file"></i></a>
+        </div>
+        
+    </section>
+    <!-- Section - Home / End -->
+
+    <!-- Section - Resume -->
+    <section id="resume" class="section padding-v-60">
+
+        <!-- Content -->
+        <div class="container container-wide">
+
+            <h6 class="margin-b-50">Resume</h6>
+            
+            <div class="row padding-lg">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+
+                    <!-- Resume Box / About -->
+                    <div class="resume-box">
+                        <span class="icon animated" data-animation="fadeInDown"><i class="ti-comment-alt text-tertiary"></i></span>
+                        <h4><strong>About</strong> Me</h4>
+                        <p class="lead">{{ user.aboutme }}</p>   
+                    </div>
+
+                    <!-- Resume Box / Skills -->
+                    <div class="resume-box">
+                        <span class="icon animated" data-animation="fadeInDown"><i class="ti-cup text-tertiary"></i></span>
+                        <h4><strong>Skills</strong> &amp; abilities</h4>
+                        <!-- Skill -->
+                        <div class="skill" ng-repeat="item in user.skillsandabilities">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="{{ item.percentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.percentage}}%;">
+                                    <span></span>
+                                </div>
+                            </div>
+                            <strong>{{ item.name }}</strong>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+
+                    <!-- Resume Box / Specilities -->
+                    <div class="resume-box">
+                        <span class="icon animated" data-animation="fadeInDown"><i class="ti-mouse-alt text-tertiary"></i></span>
+                        <h4>My <strong>Specialities</strong></h4>
+                        <!-- Speciality -->
+                        <div class="speciality" ng-repeat="item in user.specialities">
+                            <span class="speciality-icon"><i class="fa {{ item.icon }}"></i></span>
+                            <div class="speciality-content">
+                                <h5 class="margin-b-0">{{ item.name }}</h5>
+                                <p class="speciaity-description">{{ item.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resume Box / Education and Jobs -->
+                    <div class="resume-box">
+                        <span class="icon animated" data-animation="fadeInDown"><i class="ti-calendar text-tertiary"></i></span>
+                        <h4><strong>Education</strong> &amp; jobs</h4>
+                        <div class="timeline">
+                            <!-- Single event -->
+                            <div class="timeline-event te-primary" ng-repeat="item in user.education">
+                                <span class="event-date">{{ item.time }}</span>
+                                <span class="event-name">{{ item.name }}</span>
+                                <span class="event-description">{{ item.description }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4 col-sm-6 col-xs-12">
+
+                    <!-- Resume Box / Languages -->
+                    <div class="resume-box">
+                        <span class="icon animated" data-animation="fadeInDown"><i class="ti-cup text-tertiary"></i></span>
+                        <h4><strong>Language</strong> skills</h4>
+                        <!-- Skill -->
+                        <div class="skill" ng-repeat="item in user.languageskills">
+                            <div class="progress progress-animated">
+                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: {{item.percentage}}%;">
+                                    <span></span>
+                                </div>
+                            </div>
+                            <strong>{{item.name}}</strong>
+                        </div>
+                    </div>
+
+                    <!-- Resume Box / Hobbies -->
+                    <div class="resume-box">
+                        <span class="icon animated" data-animation="fadeInDown"><i class="ti-music-alt text-tertiary"></i></span>
+                        <h4><strong>Hobbies</strong> &amp; Interests</h4>
+                            <ul class="list-inline">
+                            <li ng-repeat="item in user.hobbies">
+                                <div class="icon-box text-center">
+                                    <span class="icon icon-sm icon-circle icon-primary icon-filled"><i class="fa {{item.icon}}"></i></span>
+                                    <span class="title">{{item.name}}</span>
+                                </div> 
+                            </li> 
+                        </ul>
+                    </div>
+
+                </div>
+            </div>     
+
+        </div>
+        
+    </section>
+    <!-- Section - Resume / End -->
+
+    <!-- Section - Contact -->
+    <section id="contact" class="section padding-v-60 min-fullheight">
+
+        <!-- BG Map -->
+        <div  class="bg-image" id="map" style="height:480px; width:80%; margin-left: 20%"></div>
+
+        <!-- Contact Box -->
+        <div class="contact-box bg-secondary dark animated" data-animation="flipInY">
+            <h1>Don’t hesitate to <strong>contact me</strong>!</h1>
+            <!-- Contact List -->
+            <ul class="list-unstyled list-unstyled-icons">
+                <li><i class="inline-icon icon-before-and-after text-primary fa fa-map-marker"></i>{{ user.address }}</li>
+                <li><i class="inline-icon icon-before-and-after text-primary fa fa-comment"></i><a href="#">{{ user.email }}</a></li>
+                <li><i class="inline-icon icon-before-and-after text-primary fa fa-phone"></i>{{ user.phone }}</li>
+            </ul>
+            <h5 class="margin-t-60">Check my social media!</h5>
+            <ul class="list-inline">
+                <li ng-repeat="item in user.socialmedia"><a ng-href="{{ item.name }}" class="icon icon-xs"><i class="fa {{ item.icon }}"></i></a></li>
+            </ul>
+        </div>
+
+    </section>
+    <!-- Section - Contact / End -->
+
+</div>
+<!-- Content / End -->
+
+<!-- Mobile Navigation -->
+<a id="mobile-nav-toggle" class="icon icon-circle icon-sm icon-primary icon-hover visible-xs visible-sm" data-target="mobile-nav">
+    <i class="ti-menu"></i>
+</a>
+<nav id="mobile-nav">
+    <div class="mobile-nav-wrapper">
+        <!-- Avatar -->
+        <img ng-src="{{ user.avatar_link }}" class="img-circle margin-b-30">
+        <!-- Nav -->
+        <ul class="nav nav-vertical">
+            <li><a href="" ng-click="gotoAnchor('start')"><span>Start</span></a></li>
+            <li><a href="" ng-click="gotoAnchor('resume')"><span>Resume</span></a></li>
+            <li><a href="" ng-click="gotoAnchor('contact')"><span>Contact</span></a></li>
+        </ul>
+        <!-- Social Media -->
+        <div class="margin-t-20">
+            <strong class="text-sm">Follow me!</strong>
+            <ul class="list-inline margin-t-10">
+                <li ng-repeat="item in user.socialmedia"><a ng-href="{{ item.name }}" class="icon icon-xs"><i class="fa {{ item.icon }}"></i></a></li>
+        </div>
+    </div>
+    <a href="#" class="mobile-nav-close icon icon-hover icon-xs icon-circle icon-primary" data-target="mobile-nav"><i class="fa fa-times"></i></a>
+</nav>
+
+<!-- Ajax Wrapper & Loader -->
+<div id="ajax-modal"></div>
+<div id="ajax-loader"><i class="fa fa-spinner fa-spin"></i></div>
+</div>

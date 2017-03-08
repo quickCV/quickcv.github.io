@@ -1,0 +1,245 @@
+                <script type="text/ng-template" id="customTemplate.html">
+                    <a><i class="fa {{ match.model.class }}"></i></a>
+                    <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+                </script>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header"><a href="#" editable-text="user.name">{{ user.name || "empty" }}</a>'s CV</h1>
+                        <h2><a ng-href="{{baseURL}}">View my CV</a></h2>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                        <div>Avatar 
+                            <table class="table table-bordered table-hover table-condensed">
+                            <tr style="font-weight: bold">
+                              <td style="width:75%"><img ng-src="{{ user.avatar_link }}" width="270px" height="340px" /></td>
+                              <td style="width:25%"><input type = "file" file-model = "myFile" id="filePicker"/></td>
+                            </tr>
+                            </table>
+                        </div>
+                        <div>Cover Picture 
+                            <table class="table table-bordered table-hover table-condensed">
+                            <tr style="font-weight: bold">
+                              <td style="width:75%"><img ng-src="{{ user.cover_link }}" width="460px" height="340px" /></td>
+                              <td style="width:25%"><input type = "file" file-model = "myFile" id="filePickerCover"/></td>
+                            </tr>
+                            </table>
+                        </div>
+                        <div>CV as PDF 
+                            <table class="table table-bordered table-hover table-condensed">
+                            <tr style="font-weight: bold">
+                              <td style="width:75%"> <a href="#" editable-text="user.cv_link">{{ user.cv_link || 'empty' }}</a></div></td>
+                              <td style="width:25%"><input type = "file" file-model = "myFile" id="filePickerPDF"/></td>
+                            </tr>
+                            </table>
+                        </div>
+                        </div>
+                        <div>Occupation: <a href="#" editable-text="user.occupation">{{ user.occupation || "empty" }}</a></div>
+                        <div>Email: <a href="#" editable-email="user.email">{{ user.email || 'empty' }}</a></div>
+                        <div>Address: <a href="#" editable-text="user.address">{{ user.address || "empty" }}</a></div>
+                        <div>Phone Number: <a href="#" editable-text="user.phone">{{ user.phone || "empty" }}</a></div>
+                        <div>About me
+                            <a href="#" editable-textarea="user.aboutme" e-rows="7" e-cols="40">
+                            <pre>{{ user.aboutme || 'no description' }}</pre>
+                            </a>
+                        </div>
+                        <div>Location (For showing on map)<br>
+                        Lattitude: <a href="#" editable-text="user.location.lat">{{ user.location.lat || 0 }}</a><br>
+                        Longitide: <a href="#" editable-text="user.location.lng">{{ user.location.lng || 0 }}</a><br>
+                        </div>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2>Specialities</h2>
+                        <table class="table table-bordered table-hover table-condensed">
+                            <tr style="font-weight: bold">
+                              <td style="width:25%">Name</td>
+                              <td style="width:25%">Description</td>
+                              <td style="width:25%">Icon</td>
+                              <td style="width:25%">Edit</td>
+                            </tr>
+                            <tr ng-repeat="item in user.specialities">
+                                <td>
+                                    <span editable-text="item.name" e-name="name" e-form="rowform">
+                                      {{ item.name || 'empty' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span editable-text="item.description" e-name="description" e-form="rowform">
+                                      {{ item.description || 'empty' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span editable-text="item.icon" e-name="icon" e-form="rowform" e-uib-typeahead="icon.class for icon in icons | filter:$viewValue | limitTo:8" e-typeahead-template-url="customTemplate.html">
+                                      {{ item.icon || 'empty' }}
+                                    </span>
+                                    <i class="fa {{item.icon}}"></i>
+                                </td>
+                                <td>
+                                <div class="buttons" ng-show="!rowform.$visible">
+                                  <button type="button" class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+                                  <button type="button" class="btn btn-danger" ng-click="removeSpeciality($index)">del</button>
+                                </div>  
+                                </td>
+                            </tr>
+                        </table>
+                        <button type="button" class="btn btn-default" ng-click="addSpeciality()">Add</button>
+
+                        <h2>Language skills</h2>
+                         <table class="table table-bordered table-hover table-condensed">
+                            <tr style="font-weight: bold">
+                              <td style="width:35%">Name</td>
+                              <td style="width:20%">Percentage (%)</td>
+                              <td style="width:25%">Edit</td>
+                            </tr>
+                            <tr ng-repeat="item in user.languageskills">
+                                <td>
+                                    <span editable-text="item.name" e-name="name" e-form="formLanguage">
+                                      {{ item.name || 'empty' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span editable-range="item.percentage" e-name="percentage" e-form="formLanguage">
+                                      {{ item.percentage || 0 }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="buttons" ng-show="!formLanguage.$visible">
+                                        <button type="button" class="btn btn-primary" ng-click="formLanguage.$show()">edit</button>
+                                        <button type="button" class="btn btn-danger" ng-click="removeLanguageskills($index)">del</button>
+                                    </div>  
+                                </td>
+                            </tr>
+                        </table>
+                        <button type="button" class="btn btn-default" ng-click="addLanguageskills()">Add</button>
+
+                        <h2>Skills and Abilities</h2>
+                         <table class="table table-bordered table-hover table-condensed">
+                            <tr style="font-weight: bold">
+                              <td style="width:35%">Name</td>
+                              <td style="width:20%">Percentage (%)</td>
+                              <td style="width:25%">Edit</td>
+                            </tr>
+                            <tr ng-repeat="item in user.skillsandabilities">
+                                <td>
+                                    <span editable-text="item.name" e-name="name" e-form="formskillsandabilities">
+                                      {{ item.name || 'empty' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span editable-range="item.percentage" e-name="percentage" e-form="formskillsandabilities">
+                                      {{ item.percentage || 0 }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="buttons" ng-show="!formskillsandabilities.$visible">
+                                        <button type="button" class="btn btn-primary" ng-click="formskillsandabilities.$show()">edit</button>
+                                        <button type="button" class="btn btn-danger" ng-click="removeSkillsAndAbilities($index)">del</button>
+                                    </div>  
+                                </td>
+                            </tr>
+                        </table>
+                        <button type="button" class="btn btn-default" ng-click="addSkillsAndAbilities()">Add</button>
+
+                        <h2>Education</h2>
+                        <table class="table table-bordered table-hover table-condensed">
+                            <tr style="font-weight: bold">
+                              <td style="width:35%">Name</td>
+                              <td style="width:20%">Description</td>
+                              <td style="width:20%">Time (From [date] - [date])</td>
+                              <td style="width:25%">Edit</td>
+                            </tr>
+                            <tr ng-repeat="item in user.education">
+                                <td>
+                                    <span editable-text="item.name" e-name="name" e-form="formeducation">
+                                      {{ item.name || 'empty' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span editable-text="item.description" e-name="description" e-form="formeducation">
+                                      {{ item.description || 'empty' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span editable-text="item.time" e-name="time" e-form="formeducation">
+                                      {{ item.time || 'empty' }}
+                                    </span>
+                                </td>
+                                <td>
+                                <div class="buttons" ng-show="!formeducation.$visible">
+                                  <button type="button" class="btn btn-primary" ng-click="formeducation.$show()">edit</button>
+                                  <button type="button" class="btn btn-danger" ng-click="removeEducation($index)">del</button>
+                                </div>  
+                                </td>
+                            </tr>
+                        </table>
+                        <button type="button" class="btn btn-default" ng-click="addEducation()">Add</button>
+
+                        <h2>Hobbies</h2>
+                         <table class="table table-bordered table-hover table-condensed">
+                            <tr style="font-weight: bold">
+                              <td style="width:35%">Name</td>
+                              <td style="width:20%">Icon</td>
+                              <td style="width:25%">Edit</td>
+                            </tr>
+                            <tr ng-repeat="item in user.hobbies">
+                                <td>
+                                    <span editable-text="item.name" e-name="name" e-form="formhobbies">
+                                      {{ item.name || 'empty' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span editable-text="item.icon" e-name="icon" e-form="formhobbies" e-uib-typeahead="icon.class for icon in icons | filter:$viewValue | limitTo:8" e-typeahead-template-url="customTemplate.html">
+                                      {{ item.icon || 'empty' }}
+                                    </span>
+                                    <i class="fa {{item.icon}}"></i>
+                                </td>
+                                <td>
+                                    <div class="buttons" ng-show="!formhobbies.$visible">
+                                        <button type="button" class="btn btn-primary" ng-click="formhobbies.$show()">edit</button>
+                                        <button type="button" class="btn btn-danger" ng-click="removeHobbies($index)">del</button>
+                                    </div>  
+                                </td>
+                            </tr>
+                        </table>
+                        <button type="button" class="btn btn-default" ng-click="addHobbies()">Add</button>
+
+                        <h2>Social Media</h2>
+                         <table class="table table-bordered table-hover table-condensed">
+                            <tr style="font-weight: bold">
+                              <td style="width:35%">Link</td>
+                              <td style="width:20%">Icon</td>
+                              <td style="width:25%">Edit</td>
+                            </tr>
+                            <tr ng-repeat="item in user.socialmedia">
+                                <td>
+                                    <span editable-text="item.name" e-name="name" e-form="formsocialmedia">
+                                      {{ item.name || 'empty' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span editable-text="item.icon" e-name="icon" e-form="formsocialmedia" e-uib-typeahead="icon.class for icon in icons | filter:$viewValue | limitTo:8" e-typeahead-template-url="customTemplate.html">
+                                      {{ item.icon || 'empty' }}
+                                    </span>
+                                    <i class="fa {{item.icon}}"></i>
+                                </td>
+                                <td>
+                                    <div class="buttons" ng-show="!formsocialmedia.$visible">
+                                        <button type="button" class="btn btn-primary" ng-click="formsocialmedia.$show()">edit</button>
+                                        <button type="button" class="btn btn-danger" ng-click="removeSocialmedia($index)">del</button>
+                                    </div>  
+                                </td>
+                            </tr>
+                        </table>
+                        <button type="button" class="btn btn-default" ng-click="addSocialmedia()">Add</button>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
