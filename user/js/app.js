@@ -134,7 +134,7 @@ app
     });
     $scope.params = $routeParams;
     $scope._id = $scope.params._id;
-    $scope.baseURL = "http://" + $location.host()+":8080/" + 'cv/#!/cv_id/' + $scope._id;
+    $scope.baseURL = "https://" + $location.host()+"/" + 'cv/#!/cv_id/' + $scope._id;
     $scope.ref = firebase.database().ref();
     $scope.userRef = $scope.ref.child($scope._id);
     var obj = $firebaseObject($scope.userRef);
