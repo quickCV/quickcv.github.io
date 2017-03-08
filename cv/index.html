@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en" ng-app="app" ng-controller="MainCtrl">
 <head>
 
 <!-- Meta -->
@@ -42,7 +42,7 @@
     <!-- Title -->
     <title>CV of {{ user.name }}- QuickCV</title>
 </head>
-<body class="header-vertical">
+<body class="header-vertical {{ class_collapsed }}">
 <ng-view></ng-view>
 <!-- JS Libraries -->
 <script src="../assets/js/jquery-1.11.3.min.js"></script>

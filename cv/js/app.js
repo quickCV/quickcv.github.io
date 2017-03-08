@@ -1,8 +1,9 @@
 var app = angular.module("app", ["ngRoute", "firebase"]);
 
 app
-.controller('MainCtrl', function($scope, $routeParams){
+.controller('MainCtrl', function($scope, $routeParams, $rootScope){
       //$scope.msg = "Hello"
+      $rootScope.class_collapsed = '';
   })
 .controller('CVCtrl', function($rootScope, $scope, $routeParams, $location, $firebaseObject, $anchorScroll){  
 	 $scope.params = $routeParams;
@@ -29,6 +30,12 @@ app
       //reset to old to keep any additional routing logic from kicking in
       $location.hash(old);
     };
+    $scope.showToggle = function(){
+      $rootScope.class_collapsed = 'mobile-nav-open';
+    }
+    $scope.hideToggle = function(){
+      $rootScope.class_collapsed = '';
+    }
 
 })
 .config(function($routeProvider, $locationProvider){

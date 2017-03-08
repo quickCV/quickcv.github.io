@@ -188,10 +188,10 @@
 <!-- Content / End -->
 
 <!-- Mobile Navigation -->
-<a id="mobile-nav-toggle" class="icon icon-circle icon-sm icon-primary icon-hover visible-xs visible-sm" data-target="mobile-nav">
+<a id="mobile-nav-toggle" class="icon icon-circle icon-sm icon-primary icon-hover visible-xs visible-sm" ng-click="showToggle()">
     <i class="ti-menu"></i>
 </a>
-<nav id="mobile-nav">
+<nav id="mobile-nav" ng-show="true" class="bg-white">
     <div class="mobile-nav-wrapper">
         <!-- Avatar -->
         <img ng-src="{{ user.avatar_link }}" class="img-circle margin-b-30">
@@ -208,7 +208,7 @@
                 <li ng-repeat="item in user.socialmedia"><a ng-href="{{ item.name }}" class="icon icon-xs"><i class="fa {{ item.icon }}"></i></a></li>
         </div>
     </div>
-    <a href="#" class="mobile-nav-close icon icon-hover icon-xs icon-circle icon-primary" data-target="mobile-nav"><i class="fa fa-times"></i></a>
+    <a class="mobile-nav-close icon icon-hover icon-xs icon-circle icon-primary" ng-click="hideToggle()"><i class="fa fa-times"></i></a>
 </nav>
 
 <!-- Ajax Wrapper & Loader -->
